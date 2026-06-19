@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NERV Timer</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@900&display=swap" rel="stylesheet">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -56,9 +59,9 @@
     </div>
     <div id="framing">
       <div id="wrapper">
+        <div id="activityTitle" class="activity-title" style="display: none;"></div>
         <div id="bigClock" class="mainColor" class="clock" onload="showTime()">
           <img class="clocktitleimg" src="src/clock-title.png" alt="">
-          <div id="activityTitle" class="activity-title" style="display: none;"></div>
           <span id="clockHour">88</span>
           <span class="clockSeparator minute">:</span>
           <span id="clockMinute">88</span>

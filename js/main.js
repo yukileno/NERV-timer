@@ -156,7 +156,6 @@ reset.addEventListener('click', function(){
     intervalModeActive = false;
 
     // タイトル表示を復元
-    document.querySelector('.clocktitleimg').style.display = 'block';
     const activityTitle = document.getElementById('activityTitle');
     if (activityTitle) activityTitle.style.display = 'none';
 
@@ -175,7 +174,6 @@ clock.addEventListener('click', function(){
     intervalModeActive = false;
 
     // タイトル表示を復元
-    document.querySelector('.clocktitleimg').style.display = 'block';
     const activityTitle = document.getElementById('activityTitle');
     if (activityTitle) activityTitle.style.display = 'none';
 }, false);
@@ -256,7 +254,6 @@ if (startInterval) {
             resetButtons();
             
             // タイトル表示を復元
-            document.querySelector('.clocktitleimg').style.display = 'block';
             const activityTitle = document.getElementById('activityTitle');
             if (activityTitle) activityTitle.style.display = 'none';
         }
@@ -287,7 +284,6 @@ function runNextInterval() {
         resetButtons();
         
         // タイトル表示を復元
-        document.querySelector('.clocktitleimg').style.display = 'block';
         const activityTitle = document.getElementById('activityTitle');
         if (activityTitle) activityTitle.style.display = 'none';
         
@@ -299,9 +295,7 @@ function runNextInterval() {
     const currentItem = intervalList[currentIntervalIndex];
     
     // 活動名表示を更新
-    const titleImg = document.querySelector('.clocktitleimg');
     const activityTitle = document.getElementById('activityTitle');
-    if (titleImg) titleImg.style.display = 'none';
     if (activityTitle) {
         activityTitle.style.display = 'block';
         activityTitle.innerText = `活動：${currentItem.name}`;

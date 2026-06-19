@@ -380,15 +380,27 @@ html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre
 .activity-title {
   position: absolute;
   z-index: 9999;
-  top: -33px;
-  left: -90px;
-  font-family: 'digital7_mono', sans-serif;
-  font-size: 24px;
-  font-weight: bold;
+  top: 12px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 900;
+  font-size: 70px;
+  line-height: 1;
   color: red;
-  text-shadow: 0px 0px 10px red;
+  text-shadow: 
+    0 0 8px black,
+    0 0 4px black,
+    -1px -1px 0 black,  
+     1px -1px 0 black,
+    -1px  1px 0 black,
+     1px  1px 0 black,
+    0px 0px 15px rgba(255, 0, 0, 0.8);
   white-space: nowrap;
-  letter-spacing: 2px;
+  letter-spacing: 12px;
+  padding-left: 12px;
+  box-sizing: border-box;
 }
 
 /* NERV風作戦設定モーダル */
