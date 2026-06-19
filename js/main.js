@@ -102,7 +102,7 @@ beast.addEventListener('click', function(){
     nervCron.reset();
     nervClock.active = false;
     theBeast.play();
-    nervCron.start(5, 'countdown');
+    nervCron.start(300, 'countdown');
     cronActive = true;
     nervCron.berserk = true;
     this.classList.add('active');
@@ -114,30 +114,35 @@ startCountdown.addEventListener('click', function(){
     resetButtons();
     nervCron.reset();
     cronActive = false;
-    duration = window.prompt('Set minutes: ', 5);
-    console.log('duration',duration);
+    let durationInput = window.prompt('設定時間 (例 5:00 または 秒数 90): ', '5:00');
+    if (durationInput === null) return;
     
-    if (duration < 1) {
-        window.alert('Default to 1 minute');
-        duration = 1;
+    let totalSeconds = 0;
+    if (durationInput.includes(':')) {
+        const parts = durationInput.split(':');
+        const minutes = parseInt(parts[0]) || 0;
+        const seconds = parseInt(parts[1]) || 0;
+        totalSeconds = (minutes * 60) + seconds;
+    } else {
+        totalSeconds = parseInt(durationInput) || 0;
     }
-    if (isNaN(duration)  || duration === null ) {
-        if (!cronPaused) {
-            window.alert(`Incorrect number format, "${duration}" is not acceptable.`);
-            nervCron.reset();
-            nervClock.start();
-            return;
-
-        }
-    } 
-    if (duration > 60) {
-        window.alert('More than an hour visuals not yet implemented.');
+    
+    if (isNaN(totalSeconds) || totalSeconds <= 0) {
+        window.alert('無効な時間です。');
         nervCron.reset();
         nervClock.start();
         return;
     }
+    
+    if (totalSeconds > 3600) {
+        window.alert('1時間以上のタイマー表示には現在対応していません。');
+        nervCron.reset();
+        nervClock.start();
+        return;
+    }
+    
     nervCron.reset();
-    nervCron.start(duration, 'countdown');
+    nervCron.start(totalSeconds, 'countdown');
     this.classList.add('active');
 
 }, false);
@@ -180,16 +185,19 @@ clock.addEventListener('click', function(){
 
 // インターバルタイマーのデータと制御
 let intervalList = [
-    { name: '漢字', duration: 5 },
-    { name: '計算', duration: 5 }
+    { name: '漢字', duration: 300 },
+    { name: '計算', duration: 300 }
 ];
 let currentIntervalIndex = 0;
 let intervalModeActive = false;
+let intervalLoopActive = false;
 
 const intervalModal = document.getElementById('intervalModal');
 const intervalListContainer = document.getElementById('intervalList');
 const newIntervalNameInput = document.getElementById('newIntervalName');
-const newIntervalTimeInput = document.getElementById('newIntervalTime');
+const newIntervalMinInput = document.getElementById('newIntervalMin');
+const newIntervalSecInput = document.getElementById('newIntervalSec');
+const loopIntervalCheckbox = document.getElementById('loopInterval');
 const addIntervalBtn = document.getElementById('addIntervalBtn');
 const startIntervalBtn = document.getElementById('startIntervalBtn');
 const closeIntervalBtn = document.getElementById('closeIntervalBtn');
@@ -200,8 +208,13 @@ function renderIntervalList() {
     intervalList.forEach((item, index) => {
         const div = document.createElement('div');
         div.className = 'interval-item';
+        
+        const min = Math.floor(item.duration / 60);
+        const sec = item.duration % 60;
+        const timeText = (min > 0 ? `${min}分` : '') + (sec > 0 ? `${sec}秒` : (min === 0 ? '0秒' : ''));
+        
         div.innerHTML = `
-            <span>${index + 1}. ${item.name} (${item.duration}分)</span>
+            <span>${index + 1}. ${item.name} (${timeText})</span>
             <button class="remove-btn" onclick="removeInterval(${index})">削除</button>
         `;
         intervalListContainer.appendChild(div);
@@ -216,10 +229,19 @@ window.removeInterval = function(index) {
 if (addIntervalBtn) {
     addIntervalBtn.addEventListener('click', () => {
         const name = newIntervalNameInput.value.trim() || `活動 ${intervalList.length + 1}`;
-        const duration = parseInt(newIntervalTimeInput.value) || 5;
+        const min = parseInt(newIntervalMinInput.value) || 0;
+        const sec = parseInt(newIntervalSecInput.value) || 0;
+        const duration = (min * 60) + sec;
+
+        if (duration <= 0) {
+            alert('時間を設定してください。');
+            return;
+        }
 
         intervalList.push({ name, duration });
         newIntervalNameInput.value = '';
+        newIntervalMinInput.value = '0';
+        newIntervalSecInput.value = '30';
         renderIntervalList();
     });
 }
@@ -236,6 +258,7 @@ if (startIntervalBtn) {
             alert('活動を1つ以上追加してください。');
             return;
         }
+        intervalLoopActive = loopIntervalCheckbox ? loopIntervalCheckbox.checked : false;
         intervalModal.style.display = 'none';
         startIntervalChain();
     });
@@ -279,6 +302,13 @@ function startIntervalChain() {
 
 function runNextInterval() {
     if (currentIntervalIndex >= intervalList.length) {
+        if (intervalLoopActive && intervalList.length > 0) {
+            currentIntervalIndex = 0;
+            alarm.play();
+            runNextInterval();
+            return;
+        }
+        
         // すべてのインターバル完了
         intervalModeActive = false;
         resetButtons();

@@ -136,7 +136,7 @@ class Cronometer {
         nervClock.pause();
         console.log(duration);
         if (mode == 'countdown' && !cronPaused) {
-            duration = (duration*60)*1000;
+            duration = duration*1000;
             this.duration = duration;
             this.mode = mode;
         } 

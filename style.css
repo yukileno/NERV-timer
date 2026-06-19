@@ -380,26 +380,21 @@ html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre
 .activity-title {
   position: absolute;
   z-index: 9999;
-  top: 12px;
-  left: 0;
-  width: 100%;
-  text-align: center;
+  top: 138px;
+  left: 205px;
+  width: auto;
+  text-align: left;
   font-family: 'Noto Serif JP', serif;
   font-weight: 900;
-  font-size: 70px;
+  font-size: 40px;
   line-height: 1;
-  color: red;
+  color: white;
   text-shadow: 
-    0 0 8px black,
-    0 0 4px black,
-    -1px -1px 0 black,  
-     1px -1px 0 black,
-    -1px  1px 0 black,
-     1px  1px 0 black,
+    0 0 8px red,
+    0 0 4px red,
     0px 0px 15px rgba(255, 0, 0, 0.8);
   white-space: nowrap;
-  letter-spacing: 12px;
-  padding-left: 12px;
+  letter-spacing: 4px;
   box-sizing: border-box;
 }
 
@@ -566,4 +561,54 @@ html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre
   opacity: 1;
   fill: #ff5555;
   filter: drop-shadow(0px 0px 8px red);
+}
+
+/* エヴァ風チェックボックス */
+.nerv-checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  color: red;
+  font-size: 14px;
+  font-weight: bold;
+  user-select: none;
+}
+
+.nerv-checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid red;
+  background: black;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.nerv-checkbox:checked {
+  background: red;
+  box-shadow: 0 0 8px red;
+}
+
+.nerv-checkbox:checked::after {
+  content: '✔';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.nerv-label {
+  cursor: pointer;
+  text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+#newIntervalMin, #newIntervalSec {
+  flex: 1;
 }

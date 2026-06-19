@@ -263,8 +263,13 @@
               <div id="intervalList" class="interval-list"></div>
               <div class="interval-input-group">
                 <input type="text" id="newIntervalName" placeholder="活動名 (例: 漢字)" class="nerv-input">
-                <input type="number" id="newIntervalTime" placeholder="分" min="1" max="60" class="nerv-input" value="5">
+                <input type="number" id="newIntervalMin" placeholder="分" min="0" max="60" class="nerv-input" value="0">
+                <input type="number" id="newIntervalSec" placeholder="秒" min="0" max="59" class="nerv-input" value="30">
                 <button id="addIntervalBtn" class="nerv-btn">追加</button>
+              </div>
+              <div class="nerv-checkbox-group">
+                <input type="checkbox" id="loopInterval" class="nerv-checkbox">
+                <label for="loopInterval" class="nerv-label">無限ループモード</label>
               </div>
             </div>
             <div class="nerv-modal-footer">
