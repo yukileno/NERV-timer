@@ -312,3 +312,57 @@ function runNextInterval() {
     nervCron.start(currentItem.duration, 'countdown');
 }
 
+// フルスクリーン制御と自動フィッティング
+const fullscreenButton = document.querySelector('.fullscreen_control');
+
+if (fullscreenButton) {
+    fullscreenButton.addEventListener('click', function() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(err => {
+                console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+            });
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+    });
+}
+
+document.addEventListener('fullscreenchange', () => {
+    const icon = document.querySelector('.fullscreen_control svg');
+    if (!icon) return;
+    if (document.fullscreenElement) {
+        // フルスクリーン中のアイコン（縮小表示）に変更
+        icon.innerHTML = '<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>';
+    } else {
+        // 通常のアイコン（拡大表示）に戻す
+        icon.innerHTML = '<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>';
+    }
+});
+
+// 画面サイズに合わせて#wrapperのスケールを動的に算出する
+function adjustScale() {
+    const wrapper = document.getElementById('wrapper');
+    if (!wrapper) return;
+    
+    const targetWidth = 800;
+    const targetHeight = 480;
+    
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+    
+    const scaleX = windowWidth / targetWidth;
+    const scaleY = windowHeight / targetHeight;
+    
+    // アスペクト比を維持して最大フィットし、少しの余白を持たせる
+    const scale = Math.min(scaleX, scaleY) * 0.95;
+    
+    wrapper.style.transform = `scale(${scale})`;
+}
+
+window.addEventListener('resize', adjustScale);
+window.addEventListener('load', adjustScale);
+// 初期実行
+adjustScale();
+

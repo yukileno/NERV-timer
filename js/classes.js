@@ -11,7 +11,7 @@ let tickingsecs = new Howl({
     src: ['src/sounds/tic.mp3']
 });
 let alarm = new Howl({
-    src: ['src/sounds/ping.mp3']
+    src: ['src/sounds/emergency-error-shutdown-2022-03-31-00-14-32-utc/Emergency Error Shutdown 01.wav']
 });
 let theBeast = new Howl({
     src: ['src/sounds/the-beast.mp3']
@@ -123,9 +123,11 @@ class Cronometer {
         this.berserk = false;
         this.active = false;
         this.onComplete = null;
+        this.playedTenSecondsAlarm = false;
     }
     start(duration, mode){
         this.active = true;
+        this.playedTenSecondsAlarm = false;
         let startTime = new Date();    // fetch current time        
         let prev_hours = crono.hours;
         let prev_minutes = crono.minutes;
@@ -163,11 +165,13 @@ class Cronometer {
                     
                 } 
                 if (!cronPaused) {
-                    // console.warn('caquita', cronPaused, duration, timeElapsed,duration-timeElapsed,'saved?',savedCuntdown);
                     timeElapsed = duration - timeElapsed;
-                    
-                    // console.warn('caquita2',duration, timeElapsed);
-                    
+                }
+                
+                // 残り10秒になったらビーストモードBGMを再生
+                if (timeElapsed <= 10000 && !nervCron.playedTenSecondsAlarm) {
+                    nervCron.playedTenSecondsAlarm = true;
+                    theBeast.play();
                 }
                 // if (nervCron.timeElapsed > 0) {
                 //     timeElapsed = nervCron.timeElapsed;
