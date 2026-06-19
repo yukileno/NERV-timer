@@ -58,6 +58,7 @@
       <div id="wrapper">
         <div id="bigClock" class="mainColor" class="clock" onload="showTime()">
           <img class="clocktitleimg" src="src/clock-title.png" alt="">
+          <div id="activityTitle" class="activity-title" style="display: none;"></div>
           <span id="clockHour">88</span>
           <span class="clockSeparator minute">:</span>
           <span id="clockMinute">88</span>
@@ -73,6 +74,9 @@
           </div>
           <div id="start-count" class="bottombox">
             COUNT
+          </div>
+          <div id="start-interval" class="bottombox">
+            INTERVAL
           </div>
           <div  id="reset" class="bottombox">
             RESET
@@ -242,6 +246,25 @@
         
         <div id="date">DATE</div>
         <span class="audio_control"><img src="images/audio-on.svg" alt="Audio Control"/></span>
+
+        <!-- インターバル設定モーダル -->
+        <div id="intervalModal" class="nerv-modal" style="display: none;">
+          <div class="nerv-modal-content">
+            <div class="nerv-modal-header">作戦計画（インターバル）設定</div>
+            <div class="nerv-modal-body">
+              <div id="intervalList" class="interval-list"></div>
+              <div class="interval-input-group">
+                <input type="text" id="newIntervalName" placeholder="活動名 (例: 漢字)" class="nerv-input">
+                <input type="number" id="newIntervalTime" placeholder="分" min="1" max="60" class="nerv-input" value="5">
+                <button id="addIntervalBtn" class="nerv-btn">追加</button>
+              </div>
+            </div>
+            <div class="nerv-modal-footer">
+              <button id="startIntervalBtn" class="nerv-btn primary">作戦開始</button>
+              <button id="closeIntervalBtn" class="nerv-btn">閉じる</button>
+            </div>
+          </div>
+        </div>
           </body>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

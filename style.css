@@ -119,7 +119,7 @@ div#databoxes {
   position: absolute;
   z-index: 88888;
   bottom: 145px;
-  left: 195px;
+  left: 155px;
   text-shadow: 0px 0px 13px red;
 }
 
@@ -374,4 +374,162 @@ html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre
 
 .inverted {
   filter: invert(100%);
+}
+
+/* 活動名表示スタイル */
+.activity-title {
+  position: absolute;
+  z-index: 9999;
+  top: -33px;
+  left: -90px;
+  font-family: 'digital7_mono', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: red;
+  text-shadow: 0px 0px 10px red;
+  white-space: nowrap;
+  letter-spacing: 2px;
+}
+
+/* NERV風作戦設定モーダル */
+.nerv-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 100000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.nerv-modal-content {
+  border: 2px solid red;
+  background: black;
+  width: 420px;
+  padding: 20px;
+  box-shadow: 0 0 20px red;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.nerv-modal-header {
+  color: red;
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: 2px solid red;
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+  text-align: center;
+  text-shadow: 0 0 8px red;
+  letter-spacing: 1px;
+}
+
+.interval-list {
+  max-height: 160px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  padding: 5px;
+  background: rgba(20, 0, 0, 0.5);
+}
+
+.interval-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: red;
+  padding: 6px 8px;
+  border-bottom: 1px dashed rgba(255, 0, 0, 0.2);
+  font-size: 14px;
+}
+
+.interval-item:last-child {
+  border-bottom: none;
+}
+
+.interval-item .remove-btn {
+  background: transparent;
+  border: 1px solid red;
+  color: red;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 11px;
+}
+
+.interval-item .remove-btn:hover {
+  background: red;
+  color: black;
+}
+
+.interval-input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.nerv-input {
+  background: black;
+  border: 1px solid red;
+  color: red;
+  padding: 6px;
+  border-radius: 3px;
+  outline: none;
+  font-size: 13px;
+  box-sizing: border-box;
+}
+
+.nerv-input:focus {
+  box-shadow: 0 0 8px red;
+}
+
+#newIntervalName {
+  flex: 2;
+}
+
+#newIntervalTime {
+  flex: 1;
+}
+
+.nerv-btn {
+  background: black;
+  border: 1px solid red;
+  color: red;
+  padding: 6px 14px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.nerv-btn:hover {
+  background: red;
+  color: black;
+  box-shadow: 0 0 8px red;
+}
+
+.nerv-btn.primary {
+  background: red;
+  color: black;
+}
+
+.nerv-btn.primary:hover {
+  background: darkred;
+  border-color: darkred;
+  color: white;
+  box-shadow: 0 0 10px darkred;
+}
+
+.nerv-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  border-top: 1px solid red;
+  padding-top: 15px;
 }

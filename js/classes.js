@@ -122,6 +122,7 @@ class Cronometer {
         this.mode;
         this.berserk = false;
         this.active = false;
+        this.onComplete = null;
     }
     start(duration, mode){
         this.active = true;
@@ -180,7 +181,11 @@ class Cronometer {
                         shutdown.play();
                         shutdownAnimation(true);
                     }
+                    let callback = nervCron.onComplete;
                     nervCron.reset();
+                    if (callback) {
+                        callback();
+                    }
                     return;
                 }
                 
