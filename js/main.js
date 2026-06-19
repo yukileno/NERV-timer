@@ -328,7 +328,7 @@ function runNextInterval() {
     const activityTitle = document.getElementById('activityTitle');
     if (activityTitle) {
         activityTitle.style.display = 'block';
-        activityTitle.innerText = `活動：${currentItem.name}`;
+        activityTitle.innerText = currentItem.name;
     }
 
     nervCron.reset();
